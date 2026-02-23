@@ -1,0 +1,27 @@
+<section class="catalog">
+  <h1>{{ store.title }}</h1>
+
+  {{#comment}}
+  This is a Handlebars block comment that should become Sline comment.
+  {{/comment}}
+
+  {{#if featured}}
+    <p class="badge">Featured</p>
+  {{else}}
+    <p class="badge">Standard</p>
+  {{/if}}
+
+  {{#unless items.size > 0}}
+    <p>No items yet.</p>
+  {{/unless}}
+
+  <ul class="products">
+    {{#each products as |product|}}
+      <li class="product">
+        <h2>{{this.title}}</h2>
+        <p>{{./price}}</p>
+        <span>{{ product.sku }}</span>
+      </li>
+    {{/each}}
+  </ul>
+</section>
