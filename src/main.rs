@@ -95,6 +95,15 @@ fn parse_args() -> Result<Config, String> {
                 println!("sline-transpiler {}", env!("CARGO_PKG_VERSION"));
                 std::process::exit(0);
             }
+            "--" => {
+                for remaining in args {
+                    if input.is_some() {
+                        return Err("Only one input path is supported".to_string());
+                    }
+                    input = Some(PathBuf::from(remaining));
+                }
+                break;
+            }
             "-o" | "--output" => {
                 let value = args.next().ok_or("Missing value for --output")?;
                 output = Some(PathBuf::from(value));
